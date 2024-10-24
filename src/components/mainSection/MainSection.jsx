@@ -1,6 +1,7 @@
 import { movieItems } from "../../constants/constants";
 import { Button } from "../button/Button";
 
+
 export const MainSection = () => {
   return (
     <div className="px-10 py-5">
@@ -31,7 +32,7 @@ export const MainSection = () => {
                     <h3 className="text-[#9CA4AB]">{item.year}</h3>
                   </div>
                   <div className="mt-3">
-                    <Button variant="bg-btnPrimary w-[60px] h-[25px]">
+                    <Button variant="bg-btnPrimary w-[60px] h-[25px]" link={`/movie/${item.id}`}>
                       Book
                     </Button>
                   </div>
@@ -55,7 +56,7 @@ export const MainSection = () => {
                     <h3 className="text-[#9CA4AB]">{item.year}</h3>
                   </div>
                   <div className="mt-3">
-                    <Button variant="bg-btnPrimary w-[60px] h-[25px]">
+                    <Button variant="bg-btnPrimary w-[60px] h-[25px]" link={`/movie/${item.id}`}>
                       Book
                     </Button>
                   </div>

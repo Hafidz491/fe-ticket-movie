@@ -5,6 +5,8 @@ import { Heroes } from "./components/heroes/Heroes";
 import { MainSection } from "./components/mainSection/MainSection";
 import Navbar from "./components/navbar/Navbar";
 import ContactUs from "./components/contact/ContactUs";
+import Detail from "./components/movie/Detail"; 
+import seatSelection from "./components/movie/seatSelection"; 
 
 function App() {
   return (
@@ -13,15 +15,20 @@ function App() {
         <Navbar />
         <Routes>
           {/* Route untuk halaman utama */}
-          <Route path="/" element={
-            <>
-              <Heroes />
-              <MainSection />
-            </>
-          } />
+          <Route
+            path="/"
+            element={
+              <>
+                <Heroes />
+                <MainSection />
+              </>
+            }
+          />
           
           {/* Route untuk halaman Contact Us */}
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/movie/:id" element={<Detail/>} />
+          <Route path="/movie/:id/seatSelection" element={<seatSelection />} />
         </Routes>
         <Footer />
       </div>
