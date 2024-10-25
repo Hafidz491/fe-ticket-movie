@@ -7,15 +7,15 @@ export const Button = (props) => {
 
   const handleClick = () => {
     if (link) {
-      navigate(link); // Arahkan ke tautan jika ada
+      navigate(link); 
     } else if (onClick) {
-      onClick(); // Jalankan fungsi onClick jika ada
+      onClick();
     }
   };
 
   return (
     <button
-      className={`text-white drop-shadow-lg rounded-md ${variant}`}
+      className={`${variant}`}
       onClick={handleClick}
     >
       {children}

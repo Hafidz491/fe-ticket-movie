@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { movieItems } from "../../constants/constants"; 
+import { Button } from "../button/Button"; // Import your Button component
 
 const Detail = () => {
   const { id } = useParams();
@@ -23,11 +24,11 @@ const Detail = () => {
         stars.push(<span key={i} className="text-gray-400">☆</span>); // Empty star
       }
     }
-    return stars; // Return the array of stars
+    return stars; 
   };
 
   const handleBuyTickets = () => {
-    navigate(`/movie/${id}/seatSelection`); // Mengarahkan ke halaman pemilihan kursi
+    navigate(`/movie/${id}/seatSelection`); // Redirect to seat selection page
   };
 
   return (
@@ -43,12 +44,12 @@ const Detail = () => {
           </div>
           <p className="text-gray-400 mt-2">Genre: {movie.genre}</p>
           <p className="text-gray-400">Director: {movie.director}</p>
-          <button 
-            className="bg-yellow-500 text-black font-bold py-2 px-4 rounded mt-4"
+          <Button 
+            variant="bg-yellow-500 text-black font-bold py-2 px-4 rounded mt-4"
             onClick={handleBuyTickets}
           >
             Buy Tickets
-          </button>
+          </Button>
         </div>
       </div>
       <div>

@@ -6,7 +6,9 @@ import { MainSection } from "./components/mainSection/MainSection";
 import Navbar from "./components/navbar/Navbar";
 import ContactUs from "./components/contact/ContactUs";
 import Detail from "./components/movie/Detail"; 
-import seatSelection from "./components/movie/seatSelection"; 
+import SeatSelection from "./components/movie/seatSelection"; 
+import Checkout from "./components/movie/checkout"; 
+
 
 function App() {
   return (
@@ -14,7 +16,6 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          {/* Route untuk halaman utama */}
           <Route
             path="/"
             element={
@@ -24,11 +25,10 @@ function App() {
               </>
             }
           />
-          
-          {/* Route untuk halaman Contact Us */}
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/movie/:id" element={<Detail/>} />
-          <Route path="/movie/:id/seatSelection" element={<seatSelection />} />
+          <Route path="/movie/:id/seatSelection" element={<SeatSelection />} />
+          <Route path="/movie/:id/seatSelection/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </div>

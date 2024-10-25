@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { movieItems } from "../../constants/constants"; 
+import { Button } from "../button/Button"; 
 
 const SeatSelection = () => {
-  const { id } = useParams(); // Ambil ID dari URL
+  const { id } = useParams();
+  const navigate = useNavigate();
   const movie = movieItems.find((item) => item.id === parseInt(id));
 
-  // Tambahkan console.log untuk memeriksa nilai ID dan movie
-  console.log("Movie ID from URL:", id);
-  console.log("Selected Movie:", movie);
-  
   const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  const columns = 14; 
+  const columns = 14;
   const [selectedSeats, setSelectedSeats] = useState([]);
-
-  // Example: reserved seats (ini biasanya dari server)
-  const reservedSeats = ['D6', 'D7', 'D9', 'E7', 'E10', 'H12'];
+  const reservedSeats = []; // Set as empty to have all seats available initially
 
   if (!movie) {
     return <div className="p-10 text-center">Movie not found</div>;
@@ -31,40 +27,60 @@ const SeatSelection = () => {
 
   const getTotal = () => selectedSeats.length * 90000;
 
-  return (
-    <div className="bg-black text-white p-10">
-      <h1 className="text-2xl font-bold mb-4">SELECT SEAT for {movie.title}</h1>
-      <div className="grid grid-cols-14 gap-2 mb-4">
-        {rows.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex flex-col">
-            {Array.from({ length: columns }).map((_, colIndex) => {
-              const seat = `${row}${colIndex + 1}`;
-              const isReserved = reservedSeats.includes(seat);
-              const isSelected = selectedSeats.includes(seat);
+  const handleCheckout = () => {
+    const total = getTotal();
+    navigate(`/movie/${id}/seatSelection/checkout`, {
+      state: {
+        movie,
+        selectedSeats,
+        total,
+      },
+    });
+  };
 
-              return (
-                <button
-                  key={seat}
-                  className={`w-12 h-12 rounded border-2 ${
-                    isReserved ? 'bg-yellow-600' : 
-                    isSelected ? 'bg-yellow-500' : 'bg-gray-800'
-                  }`}
-                  disabled={isReserved}
-                  onClick={() => toggleSeat(seat)}
-                >
-                  {seat}
-                </button>
-              );
-            })}
-          </div>
-        ))}
+
+
+  return (
+    <div className="bg-black text-white p-10 mt-20">
+      <h1 className="text-xl font-bold mb-4">SELECT SEAT for {movie.title}</h1>
+      
+      <div className="flex justify-center mb-14 mt-14">
+        <div className="bg-gray-700 text-white py-2 px-4 rounded w-1/2 text-center">SCREEN</div>
       </div>
-      <div className="mt-4">
+      
+      <div className="grid grid-cols-4 sm:grid-cols-10 lg:grid-cols-14 gap-2 mb-4 mt-4">
+        {rows.map((row) =>
+          Array.from({ length: columns }).map((_, colIndex) => {
+            const seat = `${row}${colIndex + 1}`;
+            const isReserved = reservedSeats.includes(seat);
+            const isSelected = selectedSeats.includes(seat);
+
+            return (
+              <Button
+                key={seat}
+                variant={`w-12 h-12 rounded border-2 ${
+                  isReserved ? 'bg-yellow-600' : 
+                  isSelected ? 'bg-yellow-500' : 'bg-gray-800'
+                }`}
+                onClick={() => toggleSeat(seat)}
+                disabled={isReserved}
+              >
+                {seat}
+              </Button>
+            );
+          })
+        )}
+      </div>
+      
+      <div className="flex flex-col items-center mt-14">
         <p>Booking Seat: {selectedSeats.length}</p>
         <p>Total: Rp. {getTotal().toLocaleString()}</p>
-        <button className="bg-yellow-500 text-black font-bold py-2 px-4 rounded mt-4">
+        <Button 
+          variant="bg-yellow-500 text-black font-bold py-2 px-4 rounded mt-4" 
+          onClick={handleCheckout}
+        >
           Buy Ticket
-        </button>
+        </Button>
       </div>
     </div>
   );
