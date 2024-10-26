@@ -1,7 +1,7 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { movieItems } from "../../constants/constants"; 
-import { Button } from "../button/Button"; // Import your Button component
+import { Button } from "../button/Button"; 
 
 const Detail = () => {
   const { id } = useParams();
@@ -13,33 +13,35 @@ const Detail = () => {
   }
 
   const renderStars = (rating) => {
-    const totalStars = 5; // Total number of stars to show
-    const filledStars = Math.round(rating); // Number of filled stars based on the rating
+    const totalStars = 5; 
+    const filledStars = Math.round(rating); 
     let stars = [];
 
     for (let i = 1; i <= totalStars; i++) {
       if (i <= filledStars) {
-        stars.push(<span key={i} className="text-yellow-400">⭐</span>); // Filled star
+        stars.push(<span key={i} className="text-yellow-400">⭐</span>); 
       } else {
-        stars.push(<span key={i} className="text-gray-400">☆</span>); // Empty star
+        stars.push(<span key={i} className="text-gray-400">☆</span>); 
       }
     }
     return stars; 
   };
 
   const handleBuyTickets = () => {
-    navigate(`/movie/${id}/seatSelection`); // Redirect to seat selection page
+    navigate(`/movie/${id}/seatSelection`);
   };
 
   return (
     <div className="bg-black text-white p-10 mt-24">
       <h2 className="text-2xl font-bold mb-4">Now Playing</h2>
       <div className="flex items-center mb-6">
-        <img src={movie.img} alt={movie.title} className="w-[150px] rounded-md shadow-lg mr-4" />
+        <Link to={`/movie/${id}/trailer`}> 
+          <img src={movie.img} alt={movie.title} className="w-[150px] rounded-md shadow-lg mr-4 cursor-pointer" />
+        </Link>
         <div>
           <h1 className="text-4xl font-bold">{movie.title}</h1>
           <div className="flex items-center">
-            {renderStars(movie.rating)} {/* Render stars based on the rating */}
+            {renderStars(movie.rating)} 
             <span className="text-gray-400 ml-2">({movie.rating})</span>
           </div>
           <p className="text-gray-400 mt-2">Genre: {movie.genre}</p>

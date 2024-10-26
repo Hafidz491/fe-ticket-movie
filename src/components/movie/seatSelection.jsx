@@ -11,7 +11,7 @@ const SeatSelection = () => {
   const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   const columns = 14;
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const reservedSeats = []; // Set as empty to have all seats available initially
+  const reservedSeats = []; 
 
   if (!movie) {
     return <div className="p-10 text-center">Movie not found</div>;

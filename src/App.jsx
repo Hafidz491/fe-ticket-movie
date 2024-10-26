@@ -8,7 +8,11 @@ import ContactUs from "./components/contact/ContactUs";
 import Detail from "./components/movie/Detail"; 
 import SeatSelection from "./components/movie/seatSelection"; 
 import Checkout from "./components/movie/checkout"; 
-
+import Login from "./components/auth/Login"; 
+import SignUp from "./components/auth/sign";
+import ProtectedRoute from "./components/auth/protectedRoute"; 
+import Profile from "./components/auth/profile";
+import Trailer from "./components/movie/trailer";
 
 function App() {
   return (
@@ -16,19 +20,15 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Heroes />
-                <MainSection />
-              </>
-            }
-          />
+          <Route path="/" element={<><Heroes /><MainSection /></>} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/movie/:id" element={<Detail/>} />
-          <Route path="/movie/:id/seatSelection" element={<SeatSelection />} />
-          <Route path="/movie/:id/seatSelection/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp/>} />
+          <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
+          <Route path="/movie/:id" element={<ProtectedRoute element={<Detail />} />} />
+          <Route path="/movie/:id/trailer" element={<ProtectedRoute element={<Trailer />} />} />
+          <Route path="/movie/:id/seatSelection" element={<ProtectedRoute element={<SeatSelection />} />} />
+          <Route path="/movie/:id/seatSelection/checkout" element={<ProtectedRoute element={<Checkout />} />} />
         </Routes>
         <Footer />
       </div>
