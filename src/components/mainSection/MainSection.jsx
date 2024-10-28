@@ -20,7 +20,7 @@ export const MainSection = () => {
         <div>
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold">Now Playing</h1>
-            <Button variant="bg-btnPrimary w-[100px] h-[45px]">See All</Button>
+            <Button variant="bg-btnPrimary w-[100px] h-[45px]" link={`/movie`}>See All</Button>
           </div>
           <div className="flex gap-10 justify-center items-center">
             {movieItems.map((item) => (
@@ -44,7 +44,7 @@ export const MainSection = () => {
         <div className="mt-14">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold">Comingsoon</h1>
-            <Button variant="bg-btnPrimary w-[100px] h-[45px]">See All</Button>
+            <Button variant="bg-btnPrimary w-[100px] h-[45px]" link={`/comingsoon`}>See All</Button>
           </div>
           <div className="flex gap-10 justify-center items-center">
             {movieItems.map((item) => (
