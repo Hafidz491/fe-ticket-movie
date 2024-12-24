@@ -2,10 +2,10 @@ import dramatic from "../../assets/dramatic.svg";
 import { NavbarItems } from "../../constants/constants";
 import { Button } from "../button/Button";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../components/auth/authContext"; // Pastikan path sesuai
+import { useAuth } from "../../Utils/AuthContext";
 
 const Navbar = () => {
-  const { isAuthenticated, logout } = useAuth(); // Mengambil status autentikasi
+  const { currentUser } = useAuth(); // Mengambil status autentikasi
 
   return (
     <div className="absolute top-0 left-0 z-10 flex items-center justify-between w-full px-10 py-4 navbar">
@@ -16,7 +16,7 @@ const Navbar = () => {
         {NavbarItems.map((item) => (
           <Link
             key={item.label}
-            to={item.link}  
+            to={item.link}
             className="text-base font-normal cursor-pointer"
           >
             {item.label}
@@ -27,11 +27,11 @@ const Navbar = () => {
         <input
           type="text"
           placeholder="Search"
-          className="bg-gray-100 rounded-md px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 text-black bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-gray-400"
+          className="w-5 h-5 text-gray-400"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -42,26 +42,25 @@ const Navbar = () => {
           />
         </svg>
         <svg
-          xmlns ="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-gray-400"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-5 h-5 text-gray-400"
           viewBox="0 0 20 20"
           fill="currentColor"
-        >
-        </svg>
+        ></svg>
       </div>
       <div>
-        {!isAuthenticated ? (
+        {!currentUser ? (
           <Link to="/login">
             <Button variant="bg-[#FFA500] w-[100px] h-[40px]">Login</Button>
           </Link>
         ) : (
           <>
             <Link to="/profile">
-                  <img 
-                    src="path_to_your_image.png" // Ganti dengan path gambar Anda
-                    alt="Profile"
-                    className="w-[40px] h-[40px] cursor-pointer" // Sesuaikan ukuran gambar
-                  />
+              <img
+                src="path_to_your_image.png" // Ganti dengan path gambar Anda
+                alt="Profile"
+                className="w-[40px] h-[40px] cursor-pointer" // Sesuaikan ukuran gambar
+              />
             </Link>
           </>
         )}
