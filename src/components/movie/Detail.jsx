@@ -99,7 +99,9 @@ const Detail = () => {
             {renderStars(movieDetails.rating)}
             <span className="ml-2 text-gray-400">({movieDetails.rating})</span>
           </div>
-          <p className="mt-2 text-gray-400">Cast: {movieDetails.cast}</p>
+          <p className="mt-2 text-gray-400">
+            Cast: {movieDetails.cast && movieDetails.cast.join(", ")}
+          </p>
           <p className="text-gray-400">Producer: {movieDetails.producer}</p>
           <Button
             variant="bg-yellow-500 text-black font-bold py-2 px-4 rounded mt-4"
